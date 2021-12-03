@@ -3,13 +3,14 @@ def part1():
     horizontalPos = 0
     depth = 0
     for line in file:
-        parts = line.split(" ")
-        if parts[0] == "forward":
-            horizontalPos += int(parts[1])
-        elif parts[0] == "up":
-            depth -= int(parts[1])
-        elif parts[0] == "down":
-            depth += int(parts[1])
+        command = line.split(" ")[0]
+        value = line.split(" ")[1]
+        if command == "forward":
+            horizontalPos += int(value)
+        elif command == "up":
+            depth -= int(value)
+        elif command == "down":
+            depth += int(value)
     print(horizontalPos * depth)
 
 def part2():
@@ -18,14 +19,15 @@ def part2():
     depth = 0
     aim = 0
     for line in file:
-        parts = line.split(" ")
-        if parts[0] == "forward":
-            horizontalPos += int(parts[1])
-            depth += (aim * int(parts[1]))
-        elif parts[0] == "up":
-            aim -= int(parts[1])
-        elif parts[0] == "down":
-            aim += int(parts[1])
+        command = line.split(" ")[0]
+        value = line.split(" ")[1]
+        if command == "forward":
+            horizontalPos += int(value)
+            depth += (aim * int(value))
+        elif command == "up":
+            aim -= int(value)
+        elif command == "down":
+            aim += int(value)
     print(horizontalPos * depth)
 
 
