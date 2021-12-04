@@ -1,3 +1,4 @@
+# brute force solution for part 1
 gamma = []
 def part1():
     epsilon = ''
@@ -90,46 +91,54 @@ def part1():
         else:
             gamma.append('1')
     print(gamma)
-    # i'm not writing code to conver binary to decimal
-    # just use an online calculator
+    gammaString = ''
+    for i in gamma:
+        gammaString += i
+    print(int(gammaString, 2))
 
 def part2():
     oxygen_generator_rating = []
+    data_list = []
     with open("day3/inputs.txt") as file:
-        mylist = file.read().splitlines()
-        for i in mylist:
-            n = 0
-            match = False
-            digits = list(map(int, i))
-            for num in gamma:
-                if n == 10:
-                    break
-                    match = True
-                if digits[n] == num:
-                    n += 1
-                    continue
+        for line in file:
+            data_list.append(line.strip())
+        numbers = data_list.copy
+        data_size = len(data_list[0])
+        for i in range(data_size):
+            sorted_nums = []
+            zeros = 0
+            ones = 0
+            for data in numbers:
+                if int(data[i]) == 1:
+                    ones += 1
                 else:
-                    break
-            if match == True:
-                oxygen_generator_rating = digits
-                print(digits)
-            print(match)
-            """ if int(digits[0]) == int(gamma[0]):
-                if digits[1] == gamma[1]:
-                    if digits[2] == gamma[2]:
-                        if digits[3] == gamma[3]:
-                            if digits[4] == gamma[4]:
-                                if digits[5] == gamma[5]:
-                                    if digits[6] == gamma[6]:
-                                        if digits[7] == gamma[7]:
-                                            if digits[8] == gamma[8]:
-                                                if digits[9] == gamma[9]:
-                                                    if digits[10] == gamma[10]:
-                                                        if digits[11] == gamma[11]:
-                                                            if digits[12] == gamma[12]:
-                                                                print(digits)
- """
-        print(oxygen_generator_rating)
+                    zeros +=1
+            most_common_oxygen = 0
+            most_common_co2 = 0
+            if ones >= zeros:
+                most_common_oxygen = 1
+                most_common_co2 = 0
+            else:
+                most_common_oxygen = 0
+                most_common_co2 = 1
+            for data in numbers:
+                if int(data[i] == most_common_oxygen):
+                    sorted_nums.append(data)
+            numbers = sorted_nums.copy()
+            if len(numbers) == 1:
+                print(strToInt(numbers[0]))
+
+
+def strToInt(stringNumber):
+	value = 0
+	posCount = 0
+	for s in stringNumber:
+		posCount += 1
+		value += int(s)*2**(len(stringNumber)-posCount)
+	return value
+                
+            
+
 
 
 part2()
